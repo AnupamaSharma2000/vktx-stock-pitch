@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VKTX — Stock Pitch | Viking Therapeutics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Viking V logo">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary)"/>
+          <path d="M8 8L16 24L24 8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11 8L16 18L21 8" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+        </svg>
+        <span class="nav-brand">VKTX <span class="nav-sub">Stock Pitch</span></span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-price" id="live-price">$32.40</span>
+        <span class="nav-change positive" id="live-change">+8.29%</span>
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">BUY RECOMMENDATION · NASDAQ: VKTX</div>
+      <h1 class="hero-title">Viking Therapeutics</h1>
+      <p class="hero-subtitle">The GLP-1 dark horse the market has mispriced by <em>215%</em></p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Current Price</span>
+          <span class="meta-value">$32.40</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <span class="meta-label">Price Target</span>
+          <span class="meta-value green">$102.00</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <span class="meta-label">Upside</span>
+          <span class="meta-value green">+215%</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <span class="meta-label">Market Cap</span>
+          <span class="meta-value">$3.7B</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <span class="meta-label">Analyst Consensus</span>
+          <span class="meta-value green">Strong Buy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION NAV -->
+  <div class="section-nav">
+    <div class="section-nav-inner">
+      <a href="#thesis" class="snav-link active">Thesis</a>
+      <a href="#pipeline" class="snav-link">Pipeline</a>
+      <a href="#market" class="snav-link">Market</a>
+      <a href="#financials" class="snav-link">Financials</a>
+      <a href="#valuation" class="snav-link">Valuation</a>
+      <a href="#risks" class="snav-link">Risks</a>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- THESIS -->
+    <section class="content-section" id="thesis">
+      <div class="section-label">01 — INVESTMENT THESIS</div>
+      <h2 class="section-title">Why the Market Is Wrong</h2>
+      <p class="section-lead">VKTX has fallen ~67% from its 2024 peak of $99, not because the science failed — but because macro fears and competitive noise crowded out rational analysis. The Phase 3 VANQUISH trials just completed enrollment, and oral VK2735 Phase 3 is underway. This is maximum fear, minimum information — the ideal entry point.</p>
+
+      <div class="thesis-grid">
+        <div class="thesis-card">
+          <div class="thesis-icon">📉</div>
+          <h3>The Disconnect</h3>
+          <p>Stock is priced as if VK2735 fails. But Phase 2 data showed 14.7% body weight reduction at 13 weeks for injectable, and 8.2% at 13 weeks for oral — competitive with Lilly's Zepbound.</p>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-icon">💊</div>
+          <h3>Dual-Formulation Edge</h3>
+          <p>VK2735 has both injectable AND oral forms in late-stage trials. Most GLP-1 competitors are single-formulation. This doubles Viking's addressable patient population.</p>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-icon">🎯</div>
+          <h3>M&A Optionality</h3>
+          <p>Pfizer, AstraZeneca, and Roche all lack a market-ready GLP-1 therapy. A successful Phase 3 readout makes Viking an obvious acquisition target at a significant premium.</p>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-icon">🏦</div>
+          <h3>Well Capitalized</h3>
+          <p>$705M in cash and short-term investments, virtually zero debt. At current burn rate (~$279M/year), VKTX has 2.5+ years of runway — through all critical Phase 3 readouts.</p>
+        </div>
+      </div>
+
+      <!-- Price Chart -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">VKTX Price History (2024–2026)</div>
+            <div class="chart-subtitle">Annotated with key clinical events</div>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section class="content-section" id="pipeline">
+      <div class="section-label">02 — PIPELINE</div>
+      <h2 class="section-title">VK2735: The Core Asset</h2>
+      <p class="section-lead">Viking's lead compound is a GIP/GLP-1 dual agonist — the same mechanism behind Eli Lilly's $20B+ revenue blockbuster Zepbound. Two formulations, two patient segments, one platform.</p>
+
+      <div class="pipeline-table-wrap">
+        <table class="pipeline-table">
+          <thead>
+            <tr>
+              <th>Program</th>
+              <th>Indication</th>
+              <th>Stage</th>
+              <th>Progress</th>
+              <th>Key Readout</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>VK2735 Injectable</strong></td>
+              <td>Obesity</td>
+              <td><span class="badge phase3">Phase 3</span></td>
+              <td>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" style="width:85%"></div>
+                </div>
+                <span class="progress-label">Enrollment complete (VANQUISH)</span>
+              </td>
+              <td class="catalyst">2026–2027</td>
+            </tr>
+            <tr>
+              <td><strong>VK2735 Oral</strong></td>
+              <td>Obesity</td>
+              <td><span class="badge phase3">Phase 3</span></td>
+              <td>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" style="width:65%"></div>
+                </div>
+                <span class="progress-label">Enrolling (VENTURE-2)</span>
+              </td>
+              <td class="catalyst">2027</td>
+            </tr>
+            <tr>
+              <td><strong>VK2735 Injectable</strong></td>
+              <td>NASH/MASH</td>
+              <td><span class="badge phase2">Phase 2</span></td>
+              <td>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" style="width:50%"></div>
+                </div>
+                <span class="progress-label">Ongoing</span>
+              </td>
+              <td class="catalyst">2026</td>
+            </tr>
+            <tr>
+              <td><strong>VK2809</strong></td>
+              <td>NASH/MASH</td>
+              <td><span class="badge phase2">Phase 2</span></td>
+              <td>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" style="width:70%"></div>
+                </div>
+                <span class="progress-label">Data available</span>
+              </td>
+              <td class="catalyst">Partnering</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Clinical efficacy comparison -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Weight Loss Efficacy: VK2735 vs. Competitors</div>
+            <div class="chart-subtitle">% body weight reduction at 13 weeks (Phase 2/3 data)</div>
+          </div>
+        </div>
+        <div class="chart-wrap chart-wrap--short">
+          <canvas id="efficacyChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET -->
+    <section class="content-section" id="market">
+      <div class="section-label">03 — MARKET OPPORTUNITY</div>
+      <h2 class="section-title">A $100B Market Still in Early Innings</h2>
+      <p class="section-lead">The GLP-1 obesity market is the largest pharmaceutical opportunity of the decade. Only ~3% of eligible US patients are currently treated — leaving enormous room for multiple winners. Viking doesn't need to beat Lilly; it just needs a slice of a $100B pie.</p>
+
+      <div class="market-stats">
+        <div class="stat-card">
+          <div class="stat-value">$100B</div>
+          <div class="stat-label">Projected GLP-1 market by 2030</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~3%</div>
+          <div class="stat-label">Current US patient penetration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">42%</div>
+          <div class="stat-label">US adult obesity prevalence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$15K+</div>
+          <div class="stat-label">Annual GLP-1 drug revenue per patient</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">GLP-1 Market Growth Projection (2023–2030E)</div>
+            <div class="chart-subtitle">Total addressable market, $B</div>
+          </div>
+        </div>
+        <div class="chart-wrap chart-wrap--short">
+          <canvas id="marketChart"></canvas>
+        </div>
+      </div>
+
+      <div class="competitive-grid">
+        <div class="section-label" style="margin-bottom: var(--space-6)">Competitive Landscape</div>
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Drug</th>
+                <th>Form</th>
+                <th>Stage</th>
+                <th>Weight Loss (13wk)</th>
+                <th>Market Cap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>Viking Therapeutics</strong></td>
+                <td>VK2735</td>
+                <td>Both</td>
+                <td>Phase 3</td>
+                <td class="green"><strong>14.7% / 8.2%</strong></td>
+                <td>$3.7B</td>
+              </tr>
+              <tr>
+                <td>Eli Lilly</td>
+                <td>Zepbound</td>
+                <td>Injectable</td>
+                <td>Approved</td>
+                <td>~20% (72 wk)</td>
+                <td>$700B+</td>
+              </tr>
+              <tr>
+                <td>Novo Nordisk</td>
+                <td>Wegovy</td>
+                <td>Injectable</td>
+                <td>Approved</td>
+                <td>~15% (68 wk)</td>
+                <td>$400B+</td>
+              </tr>
+              <tr>
+                <td>Amgen</td>
+                <td>MariTide</td>
+                <td>Monthly inj.</td>
+                <td>Phase 3</td>
+                <td>~14% (52 wk)</td>
+                <td>$170B</td>
+              </tr>
+              <tr>
+                <td>Roche</td>
+                <td>CT-388</td>
+                <td>Injectable</td>
+                <td>Phase 2</td>
+                <td>~19% (24 wk)</td>
+                <td>$220B</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINANCIALS -->
+    <section class="content-section" id="financials">
+      <div class="section-label">04 — FINANCIALS</div>
+      <h2 class="section-title">Cash-Rich, Zero Debt</h2>
+      <p class="section-lead">For a pre-revenue biotech, VKTX's balance sheet is fortress-like. $705M in cash, $137K in total debt. At the current burn rate, Viking is funded through all Phase 3 readouts without needing to raise capital — a critical de-risking factor.</p>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Cash & Investments</div>
+          <div class="kpi-value">$705M</div>
+          <div class="kpi-delta positive">FY2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Total Debt</div>
+          <div class="kpi-value">~$0</div>
+          <div class="kpi-delta neutral">$137K (negligible)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Annual Burn Rate</div>
+          <div class="kpi-value">$279M</div>
+          <div class="kpi-delta negative">FY2025 operating cash flow</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Runway</div>
+          <div class="kpi-value">2.5+ yrs</div>
+          <div class="kpi-delta positive">Through all Phase 3 data</div>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">R&D Spend Trend</div>
+              <div class="chart-subtitle">Annual R&D investment ($M) — reflects clinical expansion</div>
+            </div>
+          </div>
+          <div class="chart-wrap chart-wrap--short">
+            <canvas id="rdChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Cash Position vs. Burn</div>
+              <div class="chart-subtitle">Cash & investments vs. operating cash outflow ($M)</div>
+            </div>
+          </div>
+          <div class="chart-wrap chart-wrap--short">
+            <canvas id="cashChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUATION -->
+    <section class="content-section" id="valuation">
+      <div class="section-label">05 — VALUATION</div>
+      <h2 class="section-title">Scenario Analysis</h2>
+      <p class="section-lead">Three outcomes, one entry price. Even the bear case scenario implies minimal downside from current levels given cash backing. The base and bull cases offer asymmetric upside driven by Phase 3 outcomes and M&A optionality.</p>
+
+      <div class="scenario-grid">
+        <div class="scenario-card bear">
+          <div class="scenario-label">Bear Case</div>
+          <div class="scenario-title">Phase 3 Miss</div>
+          <div class="scenario-price">$18–22</div>
+          <div class="scenario-desc">VK2735 fails to meet primary endpoints. Stock reverts toward cash value (~$6/share) but pipeline optionality and NASH programs maintain a floor. Probability: 25%.</div>
+          <div class="scenario-return negative">–44% to –32%</div>
+        </div>
+        <div class="scenario-card base">
+          <div class="scenario-label">Base Case</div>
+          <div class="scenario-title">Phase 3 Success, Organic</div>
+          <div class="scenario-price">$80–105</div>
+          <div class="scenario-desc">Injectable VK2735 meets endpoints, FDA approval 2027–2028, commercial launch begins. Viking captures 2–5% of GLP-1 market. Probability: 50%.</div>
+          <div class="scenario-return positive">+150% to +224%</div>
+        </div>
+        <div class="scenario-card bull">
+          <div class="scenario-label">Bull Case</div>
+          <div class="scenario-title">Phase 3 + M&A Premium</div>
+          <div class="scenario-price">$120–160</div>
+          <div class="scenario-desc">Positive data triggers acquisition bid from Pfizer, AstraZeneca, or Roche at a 3× revenue premium. Oral VK2735 success adds second blockbuster optionality. Probability: 25%.</div>
+          <div class="scenario-return positive">+270% to +394%</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Analyst Price Target Distribution</div>
+            <div class="chart-subtitle">All analyst targets vs. current price — 100% bullish consensus</div>
+          </div>
+        </div>
+        <div class="chart-wrap chart-wrap--short">
+          <canvas id="targetChart"></canvas>
+        </div>
+      </div>
+
+      <div class="expected-value-box">
+        <div class="ev-label">Probability-Weighted Expected Value</div>
+        <div class="ev-calc">
+          <span>(25% × $20)</span>
+          <span>+</span>
+          <span>(50% × $92)</span>
+          <span>+</span>
+          <span>(25% × $140)</span>
+          <span>=</span>
+          <span class="ev-result">$86.00</span>
+        </div>
+        <div class="ev-sub">Implies <strong>+165% upside</strong> from current price of $32.40</div>
+      </div>
+    </section>
+
+    <!-- RISKS -->
+    <section class="content-section" id="risks">
+      <div class="section-label">06 — RISK FACTORS</div>
+      <h2 class="section-title">What Could Go Wrong</h2>
+      <p class="section-lead">Intellectual honesty requires acknowledging the key risks. We've sized each one and identified mitigants.</p>
+
+      <div class="risk-table-wrap">
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Risk</th>
+              <th>Severity</th>
+              <th>Probability</th>
+              <th>Mitigant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Phase 3 trial failure</strong></td>
+              <td><span class="risk-badge high">High</span></td>
+              <td>25%</td>
+              <td>Strong Ph2 data; FDA fast-track designation; dual program hedges</td>
+            </tr>
+            <tr>
+              <td><strong>GLP-1 competitive pressure</strong></td>
+              <td><span class="risk-badge medium">Medium</span></td>
+              <td>40%</td>
+              <td>Oral form differentiates; large unmet need means room for 3–4 players</td>
+            </tr>
+            <tr>
+              <td><strong>Shareholder dilution</strong></td>
+              <td><span class="risk-badge medium">Medium</span></td>
+              <td>30%</td>
+              <td>$705M cash covers Phase 3 runway; dilution risk modest vs. peers</td>
+            </tr>
+            <tr>
+              <td><strong>FDA regulatory risk</strong></td>
+              <td><span class="risk-badge medium">Medium</span></td>
+              <td>15%</td>
+              <td>FDA has fast-tracked VK2735; GLP-1 class well-understood</td>
+            </tr>
+            <tr>
+              <td><strong>Pricing / reimbursement</strong></td>
+              <td><span class="risk-badge low">Low</span></td>
+              <td>20%</td>
+              <td>GLP-1s gaining Medicare coverage; oral form has pricing leverage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Catalyst Timeline -->
+      <div class="timeline-wrap">
+        <div class="section-label" style="margin-bottom: var(--space-6)">Upcoming Catalysts</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">Q2 2026</div>
+              <div class="timeline-event">VANQUISH Phase 3 interim data (injectable VK2735)</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">H2 2026</div>
+              <div class="timeline-event">VK2735 NASH/MASH Phase 2 data readout</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2027</div>
+              <div class="timeline-event">VANQUISH full Phase 3 data + NDA filing (injectable)</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2027</div>
+              <div class="timeline-event">Oral VK2735 Phase 3 interim data (VENTURE-2)</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot future"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2028</div>
+              <div class="timeline-event">FDA approval + commercial launch (injectable); potential M&A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCLUSION -->
+    <section class="content-section conclusion-section" id="conclusion">
+      <div class="conclusion-inner">
+        <div class="section-label">CONCLUSION</div>
+        <h2 class="conclusion-title">Buy VKTX. Price Target: $102.</h2>
+        <p class="conclusion-body">Viking Therapeutics offers one of the most asymmetric risk/reward profiles in biotech. At $32 — a 67% discount to its 2024 high — the stock is pricing in failure while the science points to success. With $705M in cash, zero debt, FDA fast-track status, completed Phase 3 enrollment, and 100% analyst consensus at Strong Buy, the setup is compelling. The GLP-1 market will have multiple winners; VKTX is positioned to be one of them — or a highly valuable acquisition target for a pharma giant that needs one.</p>
+        <div class="conclusion-metrics">
+          <div class="cm-item">
+            <span class="cm-label">Entry</span>
+            <span class="cm-val">$32.40</span>
+          </div>
+          <div class="cm-arrow">→</div>
+          <div class="cm-item">
+            <span class="cm-label">Target</span>
+            <span class="cm-val green">$102.00</span>
+          </div>
+          <div class="cm-item separate">
+            <span class="cm-label">Expected Value</span>
+            <span class="cm-val green">$86.00</span>
+          </div>
+          <div class="cm-item">
+            <span class="cm-label">Timeframe</span>
+            <span class="cm-val">18–24 months</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Built with <a href="https://perplexity.ai" target="_blank">Perplexity Computer</a> · Perplexity Stock Pitch Competition 2026 · Data sourced from public filings, SEC disclosures, and analyst reports.</p>
+      <p class="disclaimer">This is a student competition submission for educational purposes only. Not financial advice. All data as of March 31, 2026.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
