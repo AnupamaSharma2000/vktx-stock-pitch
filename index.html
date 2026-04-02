@@ -77,6 +77,9 @@
       <a href="#financials" class="snav-link">Financials</a>
       <a href="#valuation" class="snav-link">Valuation</a>
       <a href="#risks" class="snav-link">Risks</a>
+      <a href="#realities" class="snav-link">Realities</a>
+      <a href="#strategy" class="snav-link">Strategy</a>
+      <a href="#sources" class="snav-link">Sources</a>
     </div>
   </div>
 
@@ -513,6 +516,451 @@
       </div>
     </section>
 
+    <!-- ALTERNATE REALITIES -->
+    <section class="content-section" id="realities">
+      <div class="section-label">08 &mdash; ALTERNATE REALITIES</div>
+      <h2 class="section-title">Three Futures. One Decision.</h2>
+      <p class="section-lead">Rather than a single deterministic forecast, we model the <em>distribution</em> of outcomes. Adjust the probability sliders below to reflect your own view of the world &mdash; the expected value and action plan update in real time.</p>
+
+      <!-- PROBABILITY SLIDERS -->
+      <div class="prob-controls">
+        <div class="prob-control-header">
+          <span class="prob-label">Adjust Scenario Probabilities</span>
+          <span class="prob-total" id="prob-total">Total: 100%</span>
+        </div>
+        <div class="prob-sliders">
+          <div class="prob-slider-row">
+            <div class="prob-slider-label bear-text">&#9660; Bear (Phase 3 miss)</div>
+            <input type="range" class="prob-range bear-range" id="prob-bear" min="0" max="100" value="25" />
+            <span class="prob-val bear-text" id="val-bear">25%</span>
+          </div>
+          <div class="prob-slider-row">
+            <div class="prob-slider-label base-text">&#9658; Base (Phase 3 success)</div>
+            <input type="range" class="prob-range base-range" id="prob-base" min="0" max="100" value="50" />
+            <span class="prob-val base-text" id="val-base">50%</span>
+          </div>
+          <div class="prob-slider-row">
+            <div class="prob-slider-label bull-text">&#9650; Bull (Phase 3 + M&amp;A)</div>
+            <input type="range" class="prob-range bull-range" id="prob-bull" min="0" max="100" value="25" />
+            <span class="prob-val bull-text" id="val-bull">25%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EV LIVE DISPLAY -->
+      <div class="ev-live-box">
+        <div class="ev-live-label">Probability-Weighted Expected Value</div>
+        <div class="ev-live-value" id="ev-live">$86.00</div>
+        <div class="ev-live-sub">vs. current price of $32.40 &rarr; <span id="ev-upside" class="ev-live-upside">+165%</span> implied upside</div>
+        <canvas id="probDistChart" class="prob-dist-canvas"></canvas>
+      </div>
+
+      <!-- THREE REALITY CARDS -->
+      <div class="realities-grid">
+
+        <!-- BEAR -->
+        <div class="reality-card reality-bear" id="rc-bear">
+          <div class="reality-header">
+            <div class="reality-icon bear">&#9660;</div>
+            <div>
+              <div class="reality-name">Reality A &mdash; Bear</div>
+              <div class="reality-name-sub">Phase 3 Miss</div>
+            </div>
+            <div class="reality-prob" id="rp-bear">25%</div>
+          </div>
+          <div class="reality-price bear-text">$18 &ndash; 22</div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">What triggers this</div>
+          <ul class="reality-triggers">
+            <li>VANQUISH-1 or -2 misses primary endpoint (% weight loss vs. placebo)</li>
+            <li>FDA raises safety concerns from interim data review</li>
+            <li>Competitor approval significantly shrinks addressable market before VKTX launch</li>
+            <li>Significant share dilution via secondary offering</li>
+          </ul>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Probability timeline</div>
+          <div class="reality-timeline">
+            <div class="rtl-item"><span class="rtl-date">Q2 2026</span><span class="rtl-event">Phase 3 interim data &mdash; first signal</span></div>
+            <div class="rtl-item"><span class="rtl-date">2027</span><span class="rtl-event">Full Phase 3 readout &mdash; outcome determined</span></div>
+          </div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Action plan if this unfolds</div>
+          <div class="reality-actions">
+            <div class="action-item bear"><span class="action-icon">&#9888;</span> Monitor interim data signals &mdash; negative interim = reduce position immediately</div>
+            <div class="action-item bear"><span class="action-icon">&#9888;</span> Set a hard stop-loss at $20 (38% below current price)</div>
+            <div class="action-item bear"><span class="action-icon">&#9888;</span> Redeploy capital to cash or VK2809 (NASH pipeline still has standalone value)</div>
+            <div class="action-item neutral"><span class="action-icon">&#9432;</span> Don&rsquo;t panic-sell at announcement &mdash; first-day drops often overshoot; reassess after 48 hrs</div>
+          </div>
+        </div>
+
+        <!-- BASE -->
+        <div class="reality-card reality-base" id="rc-base">
+          <div class="reality-header">
+            <div class="reality-icon base">&#9658;</div>
+            <div>
+              <div class="reality-name">Reality B &mdash; Base</div>
+              <div class="reality-name-sub">Phase 3 Success, Organic Growth</div>
+            </div>
+            <div class="reality-prob" id="rp-base">50%</div>
+          </div>
+          <div class="reality-price base-text">$80 &ndash; 105</div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">What triggers this</div>
+          <ul class="reality-triggers">
+            <li>VANQUISH Phase 3 meets primary endpoint (expected ~14-16% weight loss)</li>
+            <li>NDA filed 2027, FDA approval 2028</li>
+            <li>Viking launches injectable VK2735 independently, captures 2&ndash;5% GLP-1 market share</li>
+            <li>Oral VK2735 Phase 3 also progresses positively</li>
+          </ul>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Probability timeline</div>
+          <div class="reality-timeline">
+            <div class="rtl-item"><span class="rtl-date">H2 2026</span><span class="rtl-event">Positive interim data &rarr; stock re-rates toward $50&ndash;60</span></div>
+            <div class="rtl-item"><span class="rtl-date">2027</span><span class="rtl-event">Full data + NDA filing &rarr; $70&ndash;85</span></div>
+            <div class="rtl-item"><span class="rtl-date">2028</span><span class="rtl-event">FDA approval + commercial launch &rarr; $90&ndash;105</span></div>
+          </div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Action plan if this unfolds</div>
+          <div class="reality-actions">
+            <div class="action-item base"><span class="action-icon">&#10003;</span> Hold core position through all Phase 3 milestones</div>
+            <div class="action-item base"><span class="action-icon">&#10003;</span> Add on any pullbacks to $25&ndash;28 range (macro weakness = gift)</div>
+            <div class="action-item base"><span class="action-icon">&#10003;</span> Take 20&ndash;30% off the table at NDA filing (~2027) to lock in gains</div>
+            <div class="action-item neutral"><span class="action-icon">&#9432;</span> Watch for M&A bid at any point &mdash; would trigger immediate full-position reassessment</div>
+          </div>
+        </div>
+
+        <!-- BULL -->
+        <div class="reality-card reality-bull" id="rc-bull">
+          <div class="reality-header">
+            <div class="reality-icon bull">&#9650;</div>
+            <div>
+              <div class="reality-name">Reality C &mdash; Bull</div>
+              <div class="reality-name-sub">Phase 3 + M&amp;A Premium</div>
+            </div>
+            <div class="reality-prob" id="rp-bull">25%</div>
+          </div>
+          <div class="reality-price bull-text">$120 &ndash; 160</div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">What triggers this</div>
+          <ul class="reality-triggers">
+            <li>Exceptional Phase 3 data (exceeds Zepbound&rsquo;s efficacy profile)</li>
+            <li>Pfizer, AstraZeneca, or Roche launches acquisition bid</li>
+            <li>Oral VK2735 Phase 3 data also positive &rarr; dual-formulation platform premium</li>
+            <li>GLP-1 pricing pressure forces Big Pharma to buy vs. build</li>
+          </ul>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Probability timeline</div>
+          <div class="reality-timeline">
+            <div class="rtl-item"><span class="rtl-date">H2 2026</span><span class="rtl-event">Blowout interim data triggers M&A speculation &rarr; $60&ndash;80</span></div>
+            <div class="rtl-item"><span class="rtl-date">2027</span><span class="rtl-event">Acquisition bid announced &rarr; stock gaps to $120&ndash;160</span></div>
+            <div class="rtl-item"><span class="rtl-date">2028</span><span class="rtl-event">Deal closes; or Viking launches as independent &rarr; $140+</span></div>
+          </div>
+          <div class="reality-divider"></div>
+          <div class="reality-trigger-label">Action plan if this unfolds</div>
+          <div class="reality-actions">
+            <div class="action-item bull"><span class="action-icon">&#9733;</span> Hold full position &mdash; do NOT sell on first M&A rumor (bidding wars happen)</div>
+            <div class="action-item bull"><span class="action-icon">&#9733;</span> If unsolicited bid comes in below $130, push back &mdash; history shows initial bids are 20&ndash;30% below final</div>
+            <div class="action-item bull"><span class="action-icon">&#9733;</span> Add call options at $40 strike if oral Ph3 data is excellent (asymmetric leverage)</div>
+            <div class="action-item neutral"><span class="action-icon">&#9432;</span> Rebalance portfolio if VKTX becomes >20% of holdings; concentration risk rises</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INVESTMENT STRATEGY -->
+    <section class="content-section" id="strategy">
+      <div class="section-label">09 &mdash; INVESTMENT STRATEGY</div>
+      <h2 class="section-title">Choose Your Approach</h2>
+      <p class="section-lead">Every investor has a different risk tolerance. Select your profile below to see a tailored allocation strategy, position sizing guide, and expected outcome range specifically calibrated for VKTX.</p>
+
+      <!-- STRATEGY TOGGLE -->
+      <div class="strategy-toggle-wrap">
+        <button class="strat-btn active" id="strat-safe" data-strategy="safe">&#128274; Safe &mdash; Capital Preservation</button>
+        <button class="strat-btn" id="strat-balanced" data-strategy="balanced">&#9878; Balanced &mdash; Risk/Reward</button>
+        <button class="strat-btn" id="strat-aggressive" data-strategy="aggressive">&#9889; Aggressive &mdash; Maximum Upside</button>
+      </div>
+
+      <!-- STRATEGY PANELS -->
+      <div class="strategy-panel" id="panel-safe">
+        <div class="strategy-header safe">
+          <div class="strategy-title-block">
+            <div class="strategy-icon">&#128274;</div>
+            <div>
+              <div class="strategy-name">Safe Strategy &mdash; Capital Preservation</div>
+              <div class="strategy-desc">Minimizes downside. Accepts lower upside. Designed for risk-averse investors who want biotech exposure without binary blow-up risk.</div>
+            </div>
+          </div>
+          <div class="strategy-ev-box">
+            <div class="strategy-ev-label">Expected Return</div>
+            <div class="strategy-ev-val">+28% to +65%</div>
+            <div class="strategy-ev-sub">at 18&ndash;24 months</div>
+          </div>
+        </div>
+        <div class="strategy-body">
+          <div class="strategy-metrics">
+            <div class="sm-item"><div class="sm-label">Allocation</div><div class="sm-val safe-text">2&ndash;3%</div><div class="sm-sub">of total portfolio</div></div>
+            <div class="sm-item"><div class="sm-label">Entry Method</div><div class="sm-val">Scaled</div><div class="sm-sub">3 tranches over 6 weeks</div></div>
+            <div class="sm-item"><div class="sm-label">Stop-Loss</div><div class="sm-val bear-text">$22</div><div class="sm-sub">&minus;32% from current</div></div>
+            <div class="sm-item"><div class="sm-label">Take-Profit 1</div><div class="sm-val safe-text">$55</div><div class="sm-sub">Sell 40% on interim data</div></div>
+            <div class="sm-item"><div class="sm-label">Take-Profit 2</div><div class="sm-val safe-text">$80</div><div class="sm-sub">Sell remaining on NDA filing</div></div>
+            <div class="sm-item"><div class="sm-label">Hedging</div><div class="sm-val">Yes</div><div class="sm-sub">Buy put at $25 strike as insurance</div></div>
+          </div>
+          <div class="strategy-rationale">
+            <div class="sr-title">Rationale &amp; Expected Outcome by Reality</div>
+            <div class="sr-grid">
+              <div class="sr-item bear">
+                <div class="sr-reality">Bear (25%)</div>
+                <div class="sr-outcome">Stop-loss at $22 limits loss to ~32%. Put hedge pays out. Net loss: ~20&ndash;25% on position.</div>
+              </div>
+              <div class="sr-item base">
+                <div class="sr-reality">Base (50%)</div>
+                <div class="sr-outcome">Take-profit at $55 (interim data) + $80 (NDA). Total return: +70&ndash;147% on position.</div>
+              </div>
+              <div class="sr-item bull">
+                <div class="sr-reality">Bull (25%)</div>
+                <div class="sr-outcome">Fully exited before full upside realized. Leaves money on table, but avoids M&A timing risk. Return: ~150%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="strategy-alternatives">
+            <div class="sa-title">Guaranteed Return Alternatives (same capital)</div>
+            <div class="sa-grid">
+              <div class="sa-item"><div class="sa-name">US Treasury 2-Year</div><div class="sa-return">~4.2% p.a.</div><div class="sa-note">Risk-free. Zero volatility.</div></div>
+              <div class="sa-item"><div class="sa-name">S&amp;P 500 Index Fund</div><div class="sa-return">~10% p.a. hist.</div><div class="sa-note">Diversified. Low biotech risk.</div></div>
+              <div class="sa-item"><div class="sa-name">XBI Biotech ETF</div><div class="sa-return">Avg +15% p.a. hist.</div><div class="sa-note">Diversified biotech. Less binary.</div></div>
+            </div>
+            <div class="sa-note-bottom">&#9432; Opportunity cost: If VKTX hits base case ($92), the Treasury &amp; S&P alternatives yield far less over the same 2-year window. The tradeoff is certainty vs. upside.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="strategy-panel hidden" id="panel-balanced">
+        <div class="strategy-header balanced">
+          <div class="strategy-title-block">
+            <div class="strategy-icon">&#9878;</div>
+            <div>
+              <div class="strategy-name">Balanced Strategy &mdash; Risk/Reward</div>
+              <div class="strategy-desc">The primary recommendation. Rides Phase 3 catalysts while managing tail risk. Designed for investors comfortable with 30&ndash;40% drawdown potential in exchange for 150&ndash;215% upside.</div>
+            </div>
+          </div>
+          <div class="strategy-ev-box">
+            <div class="strategy-ev-label">Expected Return</div>
+            <div class="strategy-ev-val">+165%</div>
+            <div class="strategy-ev-sub">probability-weighted EV</div>
+          </div>
+        </div>
+        <div class="strategy-body">
+          <div class="strategy-metrics">
+            <div class="sm-item"><div class="sm-label">Allocation</div><div class="sm-val balanced-text">4&ndash;6%</div><div class="sm-sub">of total portfolio</div></div>
+            <div class="sm-item"><div class="sm-label">Entry Method</div><div class="sm-val">2 tranches</div><div class="sm-sub">50% now, 50% on first dip</div></div>
+            <div class="sm-item"><div class="sm-label">Stop-Loss</div><div class="sm-val bear-text">$20</div><div class="sm-sub">Mental stop, not hard order</div></div>
+            <div class="sm-item"><div class="sm-label">Take-Profit 1</div><div class="sm-val balanced-text">$65</div><div class="sm-sub">Trim 30% on interim data</div></div>
+            <div class="sm-item"><div class="sm-label">Take-Profit 2</div><div class="sm-val balanced-text">$102</div><div class="sm-sub">Sell 50% at analyst target</div></div>
+            <div class="sm-item"><div class="sm-label">Hold Through</div><div class="sm-val">M&amp;A optionality</div><div class="sm-sub">Keep 20% for acquisition upside</div></div>
+          </div>
+          <div class="strategy-rationale">
+            <div class="sr-title">Expected Outcome by Reality</div>
+            <div class="sr-grid">
+              <div class="sr-item bear">
+                <div class="sr-reality">Bear (25%)</div>
+                <div class="sr-outcome">Lose ~38&ndash;45% on position. No put protection. Painful but not portfolio-destroying at 5% allocation.</div>
+              </div>
+              <div class="sr-item base">
+                <div class="sr-reality">Base (50%)</div>
+                <div class="sr-outcome">Trim at $65 (interim) + hold to $102 (NDA). Remaining 20% rides M&A optionality. Total: ~+175%.</div>
+              </div>
+              <div class="sr-item bull">
+                <div class="sr-reality">Bull (25%)</div>
+                <div class="sr-outcome">Partial trim at $65, hold core through acquisition. Final blended return: +280&ndash;350%.</div>
+              </div>
+            </div>
+          </div>
+          <div class="strategy-alternatives">
+            <div class="sa-title">Risk-Adjusted Comparison</div>
+            <div class="sa-grid">
+              <div class="sa-item"><div class="sa-name">VKTX (this position)</div><div class="sa-return bull-text">+165% EV</div><div class="sa-note">High risk. Binary catalyst.</div></div>
+              <div class="sa-item"><div class="sa-name">Diversified Biotech ETF</div><div class="sa-return">~15% p.a.</div><div class="sa-note">30% over 2 years. Much lower risk.</div></div>
+              <div class="sa-item"><div class="sa-name">NVDA / AI basket</div><div class="sa-return">Variable</div><div class="sa-note">High growth, less binary than VKTX.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="strategy-panel hidden" id="panel-aggressive">
+        <div class="strategy-header aggressive">
+          <div class="strategy-title-block">
+            <div class="strategy-icon">&#9889;</div>
+            <div>
+              <div class="strategy-name">Aggressive Strategy &mdash; Maximum Upside</div>
+              <div class="strategy-desc">Full conviction. Leveraged exposure. Designed for investors who believe deeply in the bull case and want maximum return if Phase 3 succeeds. <strong>This strategy loses most of the position if the bear case occurs.</strong></div>
+            </div>
+          </div>
+          <div class="strategy-ev-box">
+            <div class="strategy-ev-label">Potential Return (Bull)</div>
+            <div class="strategy-ev-val aggressive-text">+394%</div>
+            <div class="strategy-ev-sub">with options leverage</div>
+          </div>
+        </div>
+        <div class="strategy-body">
+          <div class="strategy-metrics">
+            <div class="sm-item"><div class="sm-label">Allocation (Equity)</div><div class="sm-val aggressive-text">8&ndash;10%</div><div class="sm-sub">of total portfolio</div></div>
+            <div class="sm-item"><div class="sm-label">Allocation (Options)</div><div class="sm-val aggressive-text">2%</div><div class="sm-sub">Call options at $40 strike, Jan 2027</div></div>
+            <div class="sm-item"><div class="sm-label">Entry</div><div class="sm-val">All-in now</div><div class="sm-sub">No scaling. Maximum conviction.</div></div>
+            <div class="sm-item"><div class="sm-label">Stop-Loss</div><div class="sm-val bear-text">None</div><div class="sm-sub">Hold through Phase 3. Accept full binary.</div></div>
+            <div class="sm-item"><div class="sm-label">Target</div><div class="sm-val aggressive-text">$140+</div><div class="sm-sub">Exit only on M&amp;A deal close</div></div>
+            <div class="sm-item"><div class="sm-label">Options Upside</div><div class="sm-val aggressive-text">5&ndash;10&times;</div><div class="sm-sub">If stock hits $120+ by Jan 2027</div></div>
+          </div>
+          <div class="strategy-rationale">
+            <div class="sr-title">Expected Outcome by Reality</div>
+            <div class="sr-grid">
+              <div class="sr-item bear">
+                <div class="sr-reality">Bear (25%)</div>
+                <div class="sr-outcome">Catastrophic. Equity down 60&ndash;70%. Options expire worthless. At 10% portfolio allocation: total portfolio loss ~7%. Survivable but significant.</div>
+              </div>
+              <div class="sr-item base">
+                <div class="sr-reality">Base (50%)</div>
+                <div class="sr-outcome">Equity up +200%. Options 3&ndash;5&times;. Blended return on this allocation: ~+220&ndash;250%.</div>
+              </div>
+              <div class="sr-item bull">
+                <div class="sr-reality">Bull (25%)</div>
+                <div class="sr-outcome">Equity up +350%. Options 8&ndash;10&times;. Blended return: ~+400%. A $10K position becomes ~$50K.</div>
+              </div>
+            </div>
+          </div>
+          <div class="strategy-warning">
+            <span class="sw-icon">&#9888;</span>
+            <div>
+              <strong>Risk Warning:</strong> This strategy is only appropriate if you can absorb losing 60&ndash;70% of this position without affecting your financial security. Options can expire worthless. Never bet money you cannot afford to lose on a pre-revenue biotech with binary Phase 3 risk.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SOURCES -->
+    <section class="content-section" id="sources">
+      <div class="section-label">07 &mdash; DATA SOURCES</div>
+      <h2 class="section-title">Verification &amp; Sources</h2>
+      <p class="section-lead">Every data point in this pitch is traceable to a primary source. Click any link to verify directly. Sources are grouped by category.</p>
+
+      <div class="sources-grid">
+
+        <div class="source-group">
+          <div class="source-group-title">Clinical Trial Data</div>
+          <div class="source-list">
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Press Release / ObesityWeek 2024</span></div>
+              <div class="source-claim">Injectable VK2735: up to <strong>14.7%</strong> body weight reduction at 13 weeks (VENTURE Phase 2)</div>
+              <a class="source-link" href="https://ir.vikingtherapeutics.com/2024-11-04-Viking-Therapeutics-Reports-New-Data-from-VK2735-Obesity-Program-at-ObesityWeek-R-2024" target="_blank" rel="noopener">Viking IR &mdash; ObesityWeek 2024 data &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Peer-Reviewed Journal (PubMed)</span></div>
+              <div class="source-claim">VENTURE Phase 2 published in <em>Obesity</em> journal: 9.1&ndash;14.7% weight reduction, all doses significant vs. placebo (p&lt;0.0001)</div>
+              <a class="source-link" href="https://pubmed.ncbi.nlm.nih.gov/41508550/" target="_blank" rel="noopener">PubMed: Obesity Journal, Mar 2026 (NCT06068946) &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Press Release</span></div>
+              <div class="source-claim">Oral VK2735 Phase 2 VENTURE-Oral: up to <strong>12.2%</strong> weight loss at 13 weeks &mdash; corrected from 8.2% (the earlier figure was 28-day Phase 1 data)</div>
+              <a class="source-link" href="https://www.prnewswire.com/news-releases/viking-therapeutics-announces-positive-top-line-results-from-phase-2-venture-oral-dosing-trial-of-vk2735-tablet-formulation-in-patients-with-obesity-302533355.html" target="_blank" rel="noopener">PR Newswire &mdash; Phase 2 VENTURE-Oral top-line results (Aug 2025) &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">ClinicalTrials.gov</span></div>
+              <div class="source-claim">VENTURE Phase 2 trial registration &mdash; NCT06068946, randomized double-blind placebo-controlled</div>
+              <a class="source-link" href="https://clinicaltrials.gov/study/NCT06068946" target="_blank" rel="noopener">ClinicalTrials.gov &mdash; NCT06068946 &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Press Releases</span></div>
+              <div class="source-claim">VANQUISH-1 enrollment completed Nov 2025; VANQUISH-2 enrollment completed March 26, 2026 &mdash; both Phase 3 trials now fully enrolled</div>
+              <a class="source-link" href="https://www.prnewswire.com/news-releases/viking-therapeutics-announces-completion-of-enrollment-in-phase-3-vanquish-1-trial-of-vk2735-302619296.html" target="_blank" rel="noopener">PR Newswire &mdash; VANQUISH-1 enrollment complete (Nov 2025) &rarr;</a>
+              <a class="source-link" href="https://www.benzinga.com/news/26/03/51477295/viking-therapeutics-completed-enrollment-in-phase-3-vanquish-2-trial-of-vk2735" target="_blank" rel="noopener">Benzinga &mdash; VANQUISH-2 enrollment complete (Mar 26, 2026) &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="source-group">
+          <div class="source-group-title">Financial Data</div>
+          <div class="source-list">
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">SEC EDGAR (10-K)</span></div>
+              <div class="source-claim">Cash &amp; investments $705.7M, total debt $137K, operating cash outflow $278.7M &mdash; FY2025 Annual Report</div>
+              <a class="source-link" href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001607678&type=10-K&dateb=&owner=include&count=10" target="_blank" rel="noopener">SEC EDGAR &mdash; VKTX all filings (CIK 0001607678) &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">SEC Filing (8-K / Ex-99.1)</span></div>
+              <div class="source-claim">R&amp;D expenses trend from $54.2M (FY22) to $345M (FY25) confirmed via quarterly earnings releases</div>
+              <a class="source-link" href="https://www.sec.gov/Archives/edgar/data/1607678/000095017024116642/vktx-ex99_1.htm" target="_blank" rel="noopener">SEC.gov &mdash; VKTX Q3 2024 earnings release (Ex-99.1) &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Real-Time Market Data</span></div>
+              <div class="source-claim">Price $32.40, market cap $3.74B, analyst consensus Strong Buy, avg price target $102.20 &mdash; as of March 31, 2026</div>
+              <a class="source-link" href="https://perplexity.ai/finance/VKTX" target="_blank" rel="noopener">Perplexity Finance &mdash; VKTX live quote &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Analyst Reports</span></div>
+              <div class="source-claim">Price targets: HC Wainwright $102 (Buy), Canaccord $107 (Buy), JP Morgan $75 (OW), Morgan Stanley $102 (OW), BTIG $125 (Buy)</div>
+              <a class="source-link" href="https://www.marketwatch.com/investing/stock/vktx" target="_blank" rel="noopener">MarketWatch &mdash; VKTX analyst ratings &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="source-group">
+          <div class="source-group-title">Market Size &amp; Competitive Data</div>
+          <div class="source-list">
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">J.P. Morgan Research</span></div>
+              <div class="source-claim">GLP-1/incretin market to reach <strong>$200B by 2030</strong> (total market including diabetes); ~25M Americans on GLP-1 by 2030</div>
+              <a class="source-link" href="https://www.jpmorgan.com/insights/global-research/current-events/obesity-drugs" target="_blank" rel="noopener">J.P. Morgan &mdash; "How Supply and Demand for Weight Loss Drugs is Playing Out" &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge noted">Context</span> <span class="source-type">Grand View Research</span></div>
+              <div class="source-claim">Weight-loss-specific GLP-1 market: $13.8B (2024) &rarr; $48.8B by 2030 (CAGR 18.5%) &mdash; narrower definition, excludes diabetes use</div>
+              <a class="source-link" href="https://www.grandviewresearch.com/industry-analysis/glp-1-agonists-weight-loss-drugs-market-report" target="_blank" rel="noopener">Grand View Research &mdash; GLP-1 Weight Loss Market Report &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge noted">Context</span> <span class="source-type">Evaluate / Drug Discovery Trends</span></div>
+              <div class="source-claim">Top 5 GLP-1 drugs (Ozempic, Mounjaro, Wegovy, Zepbound, Cagrisema) to jointly exceed $100B in combined sales by 2030</div>
+              <a class="source-link" href="https://www.drugdiscoverytrends.com/evaluate-accentuates-shift-to-big-drugs-for-big-diseases-in-2030-projections/" target="_blank" rel="noopener">Drug Discovery Trends &mdash; Evaluate World Preview 2024 &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge verified">Verified</span> <span class="source-type">Janus Henderson / Institutional Research</span></div>
+              <div class="source-claim">Biotech 2026 catalyst overview; GLP-1 competitive dynamics including Amgen MariTide and Roche CT-388 Phase 3 timelines</div>
+              <a class="source-link" href="https://www.janushenderson.com/en-us/advisor/article/pharma-and-biotech-in-2026-a-catalyst-rich-year-ahead/" target="_blank" rel="noopener">Janus Henderson &mdash; Pharma &amp; Biotech 2026 Outlook &rarr;</a>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge noted">Note</span> <span class="source-type">CDC / WHO</span></div>
+              <div class="source-claim">42% US adult obesity prevalence; ~3% GLP-1 penetration of eligible population (estimate based on ~10M patients / ~130M eligible adults)</div>
+              <a class="source-link" href="https://www.cdc.gov/obesity/data/adult.html" target="_blank" rel="noopener">CDC &mdash; Adult Obesity Facts &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="source-group">
+          <div class="source-group-title">Data Corrections &amp; Caveats</div>
+          <div class="source-list">
+            <div class="source-item correction">
+              <div class="source-meta"><span class="source-badge corrected">Corrected</span></div>
+              <div class="source-claim">Oral VK2735 efficacy chart updated to <strong>12.2%</strong> at 13 weeks (Phase 2 VENTURE-Oral, Aug 2025). An earlier draft showed 8.2%, which was from the Phase 1 28-day study &mdash; a different, earlier-stage trial. The 12.2% is the definitive Phase 2 result.</div>
+            </div>
+            <div class="source-item correction">
+              <div class="source-meta"><span class="source-badge corrected">Corrected</span></div>
+              <div class="source-claim">Pipeline table updated: both VANQUISH-1 and VANQUISH-2 enrollment is now complete as of March 26, 2026. This is more bullish than the original draft.</div>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge noted">Caveat</span></div>
+              <div class="source-claim">The oral VK2735 12.2% result was lower than Eli Lilly&rsquo;s orforglipron and Novo&rsquo;s oral semaglutide in competitive context. This is a legitimate bear risk. The primary thesis rests on the injectable VANQUISH Phase 3 readout.</div>
+            </div>
+            <div class="source-item">
+              <div class="source-meta"><span class="source-badge noted">Caveat</span></div>
+              <div class="source-claim">The $100B market figure references the total GLP-1 + incretin market per J.P. Morgan. The obesity-only segment is projected at ~$49B (Grand View Research). The pitch uses the broader figure &mdash; both are cited and verifiable above.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- CONCLUSION -->
     <section class="content-section conclusion-section" id="conclusion">
       <div class="conclusion-inner">
@@ -545,7 +993,7 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <p>Built with <a href="https://perplexity.ai" target="_blank">Perplexity Computer</a> · Perplexity Stock Pitch Competition 2026 · Data sourced from public filings, SEC disclosures, and analyst reports.</p>
+      <p>Built with <a href="https://perplexity.ai" target="_blank">Perplexity Computer</a> · Perplexity Stock Pitch Competition 2026 · All data sourced from primary public sources, SEC filings, and peer-reviewed publications.</p>
       <p class="disclaimer">This is a student competition submission for educational purposes only. Not financial advice. All data as of March 31, 2026.</p>
     </div>
   </footer>

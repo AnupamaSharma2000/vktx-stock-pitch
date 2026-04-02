@@ -152,10 +152,10 @@ function initCharts() {
   window.charts.efficacy = new Chart(effCtx, {
     type: 'bar',
     data: {
-      labels: ['VK2735 Injectable\n(VENTURE Ph2)', 'VK2735 Oral\n(VENTURE Ph2)', "Lilly Zepbound\n(Ph3 adj.)", "Novo Wegovy\n(Ph3 adj.)", "Amgen MariTide\n(Ph3)"],
+      labels: ['VK2735 Injectable\n(VENTURE Ph2, 13wk)', 'VK2735 Oral\n(VENTURE-Oral Ph2, 13wk)', "Lilly Zepbound\n(Ph3, 72wk adj.)", "Novo Wegovy\n(Ph3, 68wk adj.)", "Amgen MariTide\n(Ph3)"],
       datasets: [{
         label: 'Body weight reduction (%)',
-        data: [14.7, 8.2, 15.0, 12.0, 10.8],
+        data: [14.7, 12.2, 15.0, 12.0, 10.8],
         backgroundColor: [c.primary + 'cc', c.primary + '88', c.blue + '88', c.muted + '66', c.muted + '66'],
         borderColor: [c.primary, c.primary + 'aa', c.blue + 'aa', 'transparent', 'transparent'],
         borderWidth: 1,
@@ -358,4 +358,189 @@ document.querySelectorAll('.thesis-card, .stat-card, .kpi-card, .scenario-card, 
   el.style.transform = 'translateY(18px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   fadeObs.observe(el);
+});
+
+// ============================================
+// ALTERNATE REALITIES — Interactive Probability
+// ============================================
+
+const SCENARIOS = {
+  bear: { midpoint: 20, label: 'Bear' },
+  base: { midpoint: 92, label: 'Base' },
+  bull: { midpoint: 140, label: 'Bull' },
+};
+const CURRENT_PRICE = 32.40;
+
+function calcEV(bear, base, bull) {
+  return (bear / 100) * SCENARIOS.bear.midpoint
+       + (base / 100) * SCENARIOS.base.midpoint
+       + (bull / 100) * SCENARIOS.bull.midpoint;
+}
+
+let probDistChart = null;
+
+function initRealities() {
+  const bearSlider = document.getElementById('prob-bear');
+  const baseSlider = document.getElementById('prob-base');
+  const bullSlider = document.getElementById('prob-bull');
+  if (!bearSlider) return;
+
+  let updating = false;
+
+  function getProbs() {
+    return {
+      bear: parseInt(bearSlider.value),
+      base: parseInt(baseSlider.value),
+      bull: parseInt(bullSlider.value),
+    };
+  }
+
+  function updateUI(changed) {
+    if (updating) return;
+    updating = true;
+
+    let { bear, base, bull } = getProbs();
+    const total = bear + base + bull;
+
+    // Normalize so they sum to 100 when user drags one
+    if (total !== 100 && changed) {
+      const others = ['bear', 'base', 'bull'].filter(k => k !== changed);
+      const remainder = 100 - (changed === 'bear' ? bear : changed === 'base' ? base : bull);
+      const otherTotal = (changed === 'bear' ? base + bull : changed === 'base' ? bear + bull : bear + base);
+      if (otherTotal > 0) {
+        const ratio = remainder / otherTotal;
+        if (changed !== 'bear') bear = Math.round(bear * ratio);
+        if (changed !== 'base') base = Math.round(base * ratio);
+        if (changed !== 'bull') bull = Math.round(bull * ratio);
+        // Fix rounding
+        const diff = 100 - bear - base - bull;
+        if (changed !== 'base') base += diff;
+        else bear += diff;
+      }
+      bearSlider.value = bear;
+      baseSlider.value = base;
+      bullSlider.value = bull;
+    }
+
+    const finalTotal = bear + base + bull;
+
+    // Update display values
+    document.getElementById('val-bear').textContent = bear + '%';
+    document.getElementById('val-base').textContent = base + '%';
+    document.getElementById('val-bull').textContent = bull + '%';
+    document.getElementById('rp-bear').textContent = bear + '%';
+    document.getElementById('rp-base').textContent = base + '%';
+    document.getElementById('rp-bull').textContent = bull + '%';
+
+    const totalEl = document.getElementById('prob-total');
+    totalEl.textContent = 'Total: ' + finalTotal + '%';
+    totalEl.classList.toggle('invalid', finalTotal !== 100);
+
+    // Update EV
+    const ev = calcEV(bear, base, bull);
+    const upside = ((ev - CURRENT_PRICE) / CURRENT_PRICE * 100).toFixed(0);
+    document.getElementById('ev-live').textContent = '$' + ev.toFixed(2);
+    const upsideEl = document.getElementById('ev-upside');
+    upsideEl.textContent = (upside > 0 ? '+' : '') + upside + '%';
+    upsideEl.style.color = upside > 0 ? 'var(--color-green)' : 'var(--color-red)';
+
+    // EV color based on value
+    const evEl = document.getElementById('ev-live');
+    if (ev > CURRENT_PRICE * 1.5) evEl.style.color = 'var(--color-green)';
+    else if (ev < CURRENT_PRICE) evEl.style.color = 'var(--color-red)';
+    else evEl.style.color = 'var(--color-primary)';
+
+    // Update probability distribution chart
+    updateProbChart(bear, base, bull, ev);
+
+    updating = false;
+  }
+
+  bearSlider.addEventListener('input', () => updateUI('bear'));
+  baseSlider.addEventListener('input', () => updateUI('base'));
+  bullSlider.addEventListener('input', () => updateUI('bull'));
+
+  // Initialize chart
+  initProbChart();
+  updateUI(null);
+}
+
+function initProbChart() {
+  const canvas = document.getElementById('probDistChart');
+  if (!canvas) return;
+  const c = getColors();
+
+  // Destroy previous if exists
+  if (probDistChart) { probDistChart.destroy(); probDistChart = null; }
+
+  const ctx = canvas.getContext('2d');
+  canvas.style.height = '80px';
+  canvas.style.maxHeight = '80px';
+  canvas.parentElement.style.overflow = 'hidden';
+
+  probDistChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Bear ($18–22)', 'Base ($80–105)', 'Bull ($120–160)'],
+      datasets: [{
+        data: [25, 50, 25],
+        backgroundColor: [c.red + '99', c.primary + '99', c.green + '99'],
+        borderColor: [c.red, c.primary, c.green],
+        borderWidth: 1, borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + ctx.parsed.y + '% probability',
+            title: ctx => ctx[0].label.replace('\n', ' ')
+          },
+          backgroundColor: c.surface, borderColor: c.border, borderWidth: 1,
+          titleColor: c.text, bodyColor: c.muted, padding: 10, cornerRadius: 8,
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: c.muted, font: { size: 10 } }, border: { display: false } },
+        y: { display: false, max: 100 }
+      },
+      animation: { duration: 300 }
+    }
+  });
+}
+
+function updateProbChart(bear, base, bull, ev) {
+  if (!probDistChart) return;
+  const c = getColors();
+  probDistChart.data.datasets[0].data = [bear, base, bull];
+  probDistChart.data.datasets[0].backgroundColor = [c.red + '99', c.primary + '99', c.green + '99'];
+  probDistChart.data.datasets[0].borderColor = [c.red, c.primary, c.green];
+  probDistChart.update('active');
+}
+
+// ============================================
+// STRATEGY TOGGLE
+// ============================================
+function initStrategyToggle() {
+  const buttons = document.querySelectorAll('.strat-btn');
+  const panels = document.querySelectorAll('.strategy-panel');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const strategy = btn.dataset.strategy;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      panels.forEach(p => {
+        p.classList.toggle('hidden', p.id !== 'panel-' + strategy);
+      });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initRealities();
+  initStrategyToggle();
 });
